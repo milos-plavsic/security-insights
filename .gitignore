@@ -4,4 +4,7 @@ cmd/*/cue2openapi
 cmd/*/openapi2md
 docs/_site/
 node_modules/
+playwright-report/
+test-results/
+.editor-browser-site/
 .DS_Store
