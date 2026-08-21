@@ -44,7 +44,7 @@ jobs:
       - name: Install editor test dependencies
         run: npm ci
 
-      - name: Install Playwright browser
+      - name: Install Playwright browsers
         run: npx --no-install playwright install --with-deps chromium firefox webkit
 
       - name: Test editor

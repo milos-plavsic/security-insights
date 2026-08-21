@@ -490,7 +490,7 @@ const FormBuilder = (function () {
     removeButton.setAttribute(
       'aria-label',
       totalItems <= minItems
-        ? `Cannot remove item ${index + 1}; minimum ${minItems} items required`
+        ? `Cannot remove item ${index + 1}; at least ${minItems} ${minItems === 1 ? 'item is' : 'items are'} required`
         : `Remove ${toLabel(arrayPath.split('.').pop())} item ${index + 1}`
     );
     removeButton.addEventListener('click', () => {

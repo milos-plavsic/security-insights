@@ -473,7 +473,7 @@ test('an imported populated document keeps dynamic arrays labelled and unique', 
   await expect(repositoryItems.nth(0)).toHaveAttribute('data-path', 'project.repositories[0]');
   await expect(repositoryItems.nth(0)).toHaveAttribute('aria-label', 'Repositories item 1');
   await expect(repositoryItems.nth(0).locator(':scope > .array-item-controls button'))
-    .toHaveAttribute('aria-label', 'Cannot remove item 1; minimum 1 items required');
+    .toHaveAttribute('aria-label', 'Cannot remove item 1; at least 1 item is required');
 
   const addButton = repositories.locator(':scope > .array-field-header button');
   await addButton.click();
