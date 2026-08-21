@@ -12,6 +12,7 @@ const App = (function () {
   let validationInterval = null;
   let lastValidation = null;
   let schemaLoadId = 0;
+  let wizardProgressObserver = null;
   let elements = {};
 
   const state = {
@@ -83,6 +84,11 @@ const App = (function () {
     [elements.modeForm, elements.modeWizard].forEach(element => {
       element.addEventListener('keydown', handleModeKeydown);
     });
+    window.addEventListener('resize', updateWizardProgressAccessibility);
+    if (typeof ResizeObserver === 'function') {
+      wizardProgressObserver = new ResizeObserver(updateWizardProgressAccessibility);
+      wizardProgressObserver.observe(elements.wizardProgress);
+    }
     elements.browseBtn.addEventListener('click', () => elements.fileInput.click());
     elements.fileInput.addEventListener('change', handleFileSelect);
     elements.dropZone.addEventListener('dragover', handleDragOver);
@@ -300,6 +306,7 @@ const App = (function () {
     FormBuilder.setReadOnlyPaths(state.readOnlyPaths);
     Wizard.setFormData(state.displayData);
     Wizard.buildProgress(elements.wizardProgress);
+    updateWizardProgressAccessibility();
     Wizard.buildContent(elements.wizardContent);
     updateWizardNav();
   }
@@ -337,6 +344,7 @@ const App = (function () {
     synchronizeEditedData(data);
     if (action === 'navigate') {
       Wizard.buildProgress(elements.wizardProgress);
+      updateWizardProgressAccessibility();
       Wizard.buildContent(elements.wizardContent);
       updateWizardNav();
       focusWizardHeading();
@@ -369,6 +377,18 @@ const App = (function () {
     const heading = elements.wizardContent.querySelector('.wizard-step-heading');
     if (heading) {
       heading.focus();
+    }
+  }
+
+  function updateWizardProgressAccessibility() {
+    const progress = elements.wizardProgress;
+    const scrollable = progress.scrollWidth > progress.clientWidth + 1;
+    if (scrollable) {
+      progress.tabIndex = 0;
+      progress.setAttribute('aria-describedby', 'wizard-progress-help');
+    } else {
+      progress.removeAttribute('tabindex');
+      progress.removeAttribute('aria-describedby');
     }
   }
 
