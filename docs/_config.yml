@@ -19,7 +19,6 @@ kramdown:
 
 # Add to plugins: list
 plugins:
-  - jekyll-remote-theme
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-relative-links
@@ -28,7 +27,7 @@ relative_links:
   enabled:     true
   collections: false
 
-remote_theme: jekyll/minima
+theme: minima
 
 # Minima-specific settings
 minima:
@@ -72,6 +71,7 @@ navigation:
 repository: ossf/security-insights
 github:
   is_project_page: true
+  repository_url: https://github.com/ossf/security-insights
 
 # Markdown settings
 markdown: kramdown

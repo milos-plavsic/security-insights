@@ -159,7 +159,7 @@ run:
 		for p in /opt/homebrew/etc/ca-certificates/cert.pem /usr/local/etc/ca-certificates/cert.pem; do \
 			if [ -f "$$p" ]; then \
 				export SSL_CERT_FILE="$$p"; \
-				echo "  >  Using CA bundle $$SSL_CERT_FILE (Homebrew Ruby's default trust store often can't verify github.com for jekyll-remote-theme; set SSL_CERT_FILE in your shell to override)"; \
+				echo "  >  Using CA bundle $$SSL_CERT_FILE (Homebrew Ruby's default trust store can fail when fetching Git-hosted gems; set SSL_CERT_FILE in your shell to override)"; \
 				break; \
 			fi; \
 		done; \

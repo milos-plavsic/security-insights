@@ -77,10 +77,17 @@ a:active {
 
 .site-title {
   flex: 1 1 auto;
+  min-width: 0;
   text-align: right;
   margin-bottom: 0;
   padding-left: 20px;
   line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.footer-legal a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .nav-items {
@@ -208,4 +215,3 @@ a:active {
 #tab-multi:checked ~ #panel-multi {
   display: block;
 }
-
