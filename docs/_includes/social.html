@@ -1,0 +1,9 @@
+{%- if site.minima.social_links -%}
+<ul class="social-media-list">
+  {%- for link in site.minima.social_links -%}
+    <li>
+      <a href="{{ link.url | escape }}">{{ link.title | escape }}</a>
+    </li>
+  {%- endfor -%}
+</ul>
+{%- endif -%}
