@@ -85,3 +85,22 @@ test('navigation submenus open from the keyboard', async ({ page }) => {
   await expect(dropdown).toHaveAttribute('open', '');
   await expect(dropdown.locator('a').first()).toBeVisible();
 });
+
+test('wizard progress remains reachable on narrow screens', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto('/editor/');
+  await expect(page.locator('#status-text')).toHaveText('Schema loaded');
+
+  await page.getByRole('button', { name: 'Start Fresh' }).click();
+  await page.getByRole('tab', { name: 'Wizard' }).click();
+
+  const progress = page.locator('#wizard-progress');
+  await expect(progress).toHaveAttribute('tabindex', '0');
+  await expect(progress).toHaveAttribute(
+    'aria-describedby',
+    'wizard-progress-help'
+  );
+  expect(
+    await progress.evaluate(element => element.scrollWidth > element.clientWidth)
+  ).toBe(true);
+});

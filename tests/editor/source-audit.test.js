@@ -113,6 +113,11 @@ test('editor exposes keyboard navigation and validation semantics', () => {
     styles,
     /\.wizard-progress-item:last-child \.wizard-step::after/
   );
+  assert.match(styles, /@media \(max-width: 600px\)[\s\S]*\.wizard-progress\s*\{/);
+  assert.match(styles, /\.wizard-progress-list\s*\{[\s\S]*min-width: 34rem/);
+  assert.match(styles, /@media \(max-width: 1024px\)[\s\S]*\.preview-panel\s*\{/);
+  assert.match(app, /progress\.scrollWidth > progress\.clientWidth \+ 1/);
+  assert.match(app, /wizard-progress-help/);
 });
 
 test('site navigation uses native keyboard-operable submenus', () => {
